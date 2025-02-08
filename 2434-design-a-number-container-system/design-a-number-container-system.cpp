@@ -1,26 +1,41 @@
 class NumberContainers {
 public:
-    map<int,int> mp;
-    map<int, set<int>> mpp;
-    NumberContainers() {
-        return;
-    }
-    
+    unordered_map<int, int> mp;
+    unordered_map<int, priority_queue<int, vector<int>, greater<int>>> mpp;
+
+    NumberContainers() {}
+
     void change(int index, int number) {
-        if(mp.find(index) !=mp.end() && mp[index] != number){
-            mpp[mp[index]].erase(index);
-            if(mpp[mp[index]].empty()){
-                mpp.erase(mp[index]);
+        if (mp.count(index)) {
+            int o=mp[index];
+            if (o!=number) {
+                mpp[o].push(index);
             }
         }
+
         mp[index]=number;
-        mpp[number].insert(index);
+        mpp[number].push(index);
     }
-    
+
     int find(int number) {
-        return mpp[number].empty()?-1 : *mpp[number].begin();
+        if (!mpp.count(number)) {
+            return -1;
+        }
+
+        auto& pq=mpp[number];
+        while (!pq.empty()) {
+            int id =pq.top();
+            if (mp[id]==number) { 
+                return id;
+            }
+            pq.pop();// yaha par galat index ko remove karege
+        }
+
+        return -1;
+
     }
 };
+
 
 /**
  * Your NumberContainers object will be instantiated and called as such:
