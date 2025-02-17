@@ -1,30 +1,26 @@
 class Solution {
 public:
-    int total;
-    void findSequences(vector<int>& count) {
-        total++;
 
-        for (int pos = 0; pos < 26; pos++) {
-            if (count[pos] == 0) {
-                continue;
+    void solve(unordered_map<char,int>& f,int &count){
+        for (auto& [ch, num] : f) {
+            if (num > 0) {
+                count++;
+                num--;
+                solve(f, count);
+                num++;
             }
-
-            count[pos]--;
-            findSequences(count);
-            count[pos]++;
         }
     }
-
-    int numTilePossibilities(std::string tiles) {
-        total = 0;
-
-        vector<int> count(26, 0);
-        for (char c : tiles) {
-            count[c - 'A']++;
+    
+    int numTilePossibilities(string tiles) {
+        
+        unordered_map<char,int> f;
+        for(char c: tiles){
+            f[c]++;
         }
-
-        findSequences(count);
-        return total-1;
+        
+        int count = 0;
+        solve(f, count);
+        return count;
     }
 };
-
