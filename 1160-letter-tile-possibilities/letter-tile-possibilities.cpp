@@ -1,33 +1,30 @@
 class Solution {
 public:
-    int n;
+    int total;
+    void findSequences(vector<int>& count) {
+        total++;
 
-    void solve(string& tiles, vector<bool>& used, unordered_set<string>& result, string &curr) {
-        result.insert(curr);
-
-        for(int i = 0; i < n; i++) {
-            if(used[i])
+        for (int pos = 0; pos < 26; pos++) {
+            if (count[pos] == 0) {
                 continue;
+            }
 
-            curr.push_back(tiles[i]);
-            used[i] = true;
-
-            solve(tiles, used, result, curr);
-
-            used[i] = false;
-            curr.pop_back();
+            count[pos]--;
+            findSequences(count);
+            count[pos]++;
         }
     }
 
-    int numTilePossibilities(string tiles) {
-        n = tiles.length();
-        vector<bool> used(n, false);
-        unordered_set<string> result;
-        string curr = "";
+    int numTilePossibilities(std::string tiles) {
+        total = 0;
 
-        solve(tiles, used, result, curr);
+        vector<int> count(26, 0);
+        for (char c : tiles) {
+            count[c - 'A']++;
+        }
 
-        return result.size()-1;
+        findSequences(count);
+        return total-1;
     }
 };
 
