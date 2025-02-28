@@ -43,7 +43,6 @@ public:
 
         return root;
     }
-
     TreeNode* recoverFromPreorder(string traversal) {
         n = traversal.length();
         int i = 0;
