@@ -28,10 +28,10 @@ class Solution {
         while (postorder[j] != nextNode) {
             j++;
         }
-
         int num = j - poststart + 1;
-
+        
         root.left = solve(prestart + 1, poststart, prestart + num, preorder, postorder);
+
         root.right = solve(prestart + num + 1, j + 1, preend, preorder, postorder);
         return root;
     }
