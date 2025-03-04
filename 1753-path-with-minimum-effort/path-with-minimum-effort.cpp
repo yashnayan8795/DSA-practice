@@ -39,7 +39,7 @@ class Solution {
 public:
     int minimumEffortPath(vector<vector<int>>& heights) {
         int low = 0;
-        int high = (int)1e6;
+        int high = 1e6;
     
         while (low < high) {
             int mid = (low + high) / 2;
