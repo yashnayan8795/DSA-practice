@@ -34,6 +34,6 @@ public:
         if (dist[dst] == 1e9)
             return -1;
         return dist[dst];
-        }
+    }
     
 };      
