@@ -10,25 +10,31 @@
  * };
  */
 class Solution {
-    public:
-        TreeNode* buildTree(std::vector<int>& preorder, std::vector<int>& inorder) {
-            std::unordered_map<int, int> inorderMap;
-            for (int i = 0; i < inorder.size(); ++i) {
-                inorderMap[inorder[i]] = i;
+public:
+    int search(vector<int>& inorder,int left,int right,int val){
+        for(int i=left;i<=right;i++){
+            if(inorder[i]==val){
+                return i;
             }
-            return buildTreeHelper(preorder, 0, preorder.size() - 1, inorderMap, 0, inorder.size() - 1);
         }
-    private:
-        TreeNode* buildTreeHelper(const vector<int>& preorder, int preStart, int preEnd,
-                                  const unordered_map<int, int>& inorderMap, int inStart, int inEnd) {
-            if (preStart > preEnd || inStart > inEnd) {
-                return nullptr; 
-            }
-            TreeNode* root = new TreeNode(preorder[preStart]);
-            int inIndex = inorderMap.at(preorder[preStart]);
-            int leftSubtreeSize = inIndex - inStart;
-            root->left = buildTreeHelper(preorder, preStart + 1, preStart + leftSubtreeSize, inorderMap, inStart, inIndex - 1);
-            root->right = buildTreeHelper(preorder, preStart + leftSubtreeSize + 1, preEnd, inorderMap, inIndex + 1, inEnd);
-            return root;
-        }
-    };
+        return -1;
+    }
+    TreeNode* helper(vector<int>& preorder, vector<int>& inorder, int& preidx, int left ,int right){
+        if(left>right) return NULL;
+
+        TreeNode* root= new TreeNode(preorder[preidx]);
+        
+        int inidx=search(inorder,left,right,preorder[preidx]);
+        preidx++;
+
+        root->left=helper(preorder,inorder,preidx,left,inidx-1);
+        root->right=helper(preorder,inorder,preidx,inidx+1,right);
+
+        return root;
+    }
+
+    TreeNode* buildTree(vector<int>& preorder, vector<int>& inorder) {
+        int preidx=0;
+        return helper(preorder,inorder,preidx,0,inorder.size()-1);
+    }
+};
