@@ -16,8 +16,8 @@ public:
         
         ans.push_back(nums[i]);
         ps(nums, ans, i+1, allsubsets);
-        
         ans.pop_back();
+        // modification to subset 1 problem here--
         int idx=i+1;
         while(idx<nums.size() && nums[i]==nums[idx]){
             idx++;
