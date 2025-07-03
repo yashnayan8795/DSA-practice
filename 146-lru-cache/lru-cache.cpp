@@ -33,7 +33,7 @@ public:
 
         Node* node = map[key];
         deleteNode(node);
-        addNode(node);  // Move to front
+        addNode(node);  
         return node->val;
     }
 
@@ -48,7 +48,7 @@ public:
             Node* lru = tail->prev;
             deleteNode(lru);
             map.erase(lru->key);
-           // delete lru; // Free memory
+           // delete lru; 
         }
 
         Node* newNode = new Node(key, value);
