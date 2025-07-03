@@ -33,7 +33,7 @@ public:
 
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < m; j++) {
-                if (grid[i][j] == '1') { // Found an unvisited land cell
+                if (grid[i][j] == '1') { 
                     bfs(grid, i, j);
                     count++;
                 }
