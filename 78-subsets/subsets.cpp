@@ -1,10 +1,12 @@
 class Solution {
 public:
     vector<vector<int>> subsets(vector<int>& nums) {
-        vector<vector<int>> allsubsets;
+        
+
+        vector<vector<int>> allSubsets;
         vector<int> ans;
-        ps(nums, ans, 0, allsubsets);
-        return allsubsets;
+        ps(nums,ans,0,allSubsets);
+        return allSubsets;
     }
     
     void ps(vector<int>& nums, vector<int>& ans, int i, vector<vector<int>>& allsubsets) {
