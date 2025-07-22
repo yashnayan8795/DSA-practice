@@ -11,7 +11,6 @@ public:
                 i++;
             while (height[j] <= h && i < j)
                 j--;
-
         }
         return container;
     }
