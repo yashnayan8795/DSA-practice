@@ -2,17 +2,16 @@ class Solution {
 public:
     
     bool canEatAll(vector<int>& piles, int givenHour, int h) {
-        int actualHour = 0;
         
-        for(int &x : piles) {
-            actualHour += x/givenHour;
-            
-            if(x%givenHour != 0)
-                actualHour++;
-            
+        int ah=0;
+        for(int &C: piles){
+            ah+= C/givenHour;
+
+            if(C%givenHour != 0)
+                ah++;
         }
         
-        return actualHour <= h;
+        return ah <= h;
     }
     
     int minEatingSpeed(vector<int>& piles, int h) {
