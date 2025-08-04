@@ -4,7 +4,7 @@ public:
         if(s.length()<2){
             return "";
         }
-        
+
         unordered_set<int> mapp;
 
         for(char c: s){
