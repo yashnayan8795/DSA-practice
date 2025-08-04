@@ -12,12 +12,16 @@ public:
             {
                 if(s[j] == c)
                     j++;
-                else if(r < k)
-                    j++, r++;
+                else if(r < k){
+                    j++;
+                    r++;
+                }
                 else if(s[i] == c)
                     i++;
-                else
-                    i++, r--;
+                else{
+                    i++, 
+                    r--;
+                }
                 ans = max(ans, j - i);
             }
         }
