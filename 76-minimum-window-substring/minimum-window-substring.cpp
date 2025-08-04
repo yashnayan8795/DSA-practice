@@ -1,44 +1,41 @@
 class Solution {
 public:
     string minWindow(string s, string t) {
-        //wordMap, windowMap --> valid then you move left
-
         unordered_map<char, int> wordMap;
         unordered_map<char, int> windowMap;
+        int total = t.size();
+        int count = 0;
+
         for(char c: t){
             wordMap[c]++;
         }
-        int count = t.size();
 
-        int mini = INT_MAX;
-        
-
-        int c = 0;
         int l = 0;
+        int mini = INT_MAX;
         int low = 0;
-        for(int r=0; r < s.size(); r++){
-            if(wordMap.count(s[r])){
-                windowMap[s[r]]++;
-                if(windowMap[s[r]] <= wordMap[s[r]]) c++;
+        for(int r=0; r<s.size(); r++){
+            char c = s[r];
+            if(wordMap.count(c)){
+                windowMap[c]++;
+                if(windowMap[c] <= wordMap[c]) count++;
             }
-            while(c >= count){
+            while(count == total){
                 if(r - l + 1 < mini){
                     mini = r - l + 1;
                     low = l;
                 }
 
-                //cout << s.substr(l, r - l + 1) << '\n';
-
-                if(wordMap.count(s[l])){
-                    windowMap[s[l]]--;
-                    if(windowMap[s[l]] < wordMap[s[l]]) c--;
+                char lc = s[l];
+                if(wordMap.count(lc)){
+                    windowMap[lc]--;
+                    if(windowMap[lc] < wordMap[lc]) count--;
                 }
+
                 l++;
             }
         }
 
         if(mini == INT_MAX) return "";
-        //cout << low << '\n';
         return s.substr(low, mini);
     }
 };
