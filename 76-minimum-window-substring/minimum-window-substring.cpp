@@ -1,6 +1,8 @@
 class Solution {
 public:
-    string minWindow(string s, string t) {
+    string minWindow(string& s, string& t) {
+        if(t.size() > s.size()) return "";
+
         unordered_map<char, int> wordMap;
         unordered_map<char, int> windowMap;
         int total = t.size();
