@@ -4,7 +4,7 @@ public:
         int n = nums.size();
         int ans = 0;
         int odd = 0;
-        int cnt = 0;
+        int count = 0;
         int l = 0;
         int r = 0;
         while(r<n)
@@ -12,14 +12,14 @@ public:
             if(nums[r]%2 != 0)
             {
                 odd++;
-                cnt = 0;
+                count = 0;
             }
             while(odd == k)
             {
-                ++cnt;
+                ++count;
                 odd -= nums[l++]&1; 
             }
-            ans += cnt;
+            ans += count;
             r++;
         }
         return ans;
